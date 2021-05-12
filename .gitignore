@@ -2,4 +2,6 @@
 .next/
 node_modules
 yarn.lock
+
+# MacOS
 .DS_Store

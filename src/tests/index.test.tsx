@@ -2,11 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
-import App from "../App";
+import Index from "../../pages/index";
 
-test("renders App Component", () => {
-  render(<App />);
+test("render index page", () => {
+  render(<Index />);
 
-  const linkElement = screen.getByText(/Welcome to Expo + Next.js 👋/i);
+  const linkElement = screen.getByText("Placeholder");
   expect(linkElement).toBeInTheDocument();
 });
+
+
