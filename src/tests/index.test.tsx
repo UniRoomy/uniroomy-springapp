@@ -10,5 +10,3 @@ test("render index page", () => {
   const linkElement = screen.getByText("Placeholder");
   expect(linkElement).toBeInTheDocument();
 });
-
-
