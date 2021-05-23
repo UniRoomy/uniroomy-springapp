@@ -1,8 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import "@testing-library/jest-dom";
-import App from "../../App";
+import "@testing-library/jest-native";
+import App from "../App";
+
+// jest.mock("../../App", () => "../../App");
 
 test("renders App Component", () => {
   render(<App />);
