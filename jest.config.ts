@@ -171,7 +171,7 @@ export default {
   // A map from regular expressions to paths to transformers
   transform: {
     // "\\.js$": "/node_modules/babel-jest",
-    "^.+\\.(js|jsx)?$": "/node_modules/babel-jest",
+    // "^.+\\.(js|jsx)?$": "/node_modules/babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
 
