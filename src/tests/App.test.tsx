@@ -9,3 +9,7 @@ import App from "../../App";
 //   const linkElement = screen.getByText(/Welcome to Expo + Next.js 👋/i);
 //   expect(linkElement).toBeInTheDocument();
 // });
+
+test(".", () => {
+  expect(true).toBe(true);
+});
