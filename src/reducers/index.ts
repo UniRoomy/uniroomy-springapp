@@ -1,5 +1,14 @@
 import { combineReducers } from "redux";
 
+/*
+loginStatus: {
+  client: boolean | null;     // if not logged in yet
+  loggedIn: boolean           // default = false
+}
+
+userMap: Map<username -> {...}>
+*/
+
 // Mobile reducers
 
 // Web reducers
@@ -22,7 +31,7 @@ const counterReducer = (state: number = 0, action: CounterAction) => {
   }
 };
 
-// combineReducers
+// Combine the above reducers for Mobile & Web
 
 export const mobileReducers = combineReducers({
   counter: counterReducer,

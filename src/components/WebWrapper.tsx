@@ -12,7 +12,7 @@ export default function WebWrapper({}: Props) {
 
   return (
     <div>
-      <h1>Placeholder</h1>
+      <h1>LANDING PAGE</h1>
       <h4>{"Counter: " + counter}</h4>
       <button onClick={() => dispatch(increment(5))}>Increment</button>
       <button onClick={() => dispatch(decrement())}>Decrement</button>
