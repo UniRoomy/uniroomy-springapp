@@ -1,6 +1,6 @@
 import React from "react";
 import Meta from "../src/components/Meta";
-import WebWrapper from "../src/components/WebWrapper";
+import WebLandingPage from "../src/components/WebLandingPage";
 
 interface Props {}
 
@@ -8,7 +8,7 @@ export default function index({}: Props) {
   return (
     <>
       <Meta />
-      <WebWrapper />
+      <WebLandingPage />
     </>
   );
 }

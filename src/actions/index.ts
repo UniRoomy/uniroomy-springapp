@@ -25,9 +25,9 @@ export const decrement = () => {
 
 export const updateUserStatus = (
   actionType: string,
-  client,
-  loggedIn,
-  email
+  client: boolean | null,
+  loggedIn: boolean,
+  email: string | null
 ): UpdateUserStatusAction => {
   return {
     type: actionType,

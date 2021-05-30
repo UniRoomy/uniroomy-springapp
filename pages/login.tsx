@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Meta from "../src/components/Meta";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../src/reducers";
@@ -9,6 +11,7 @@ interface Props {}
 
 export default function login({}: Props) {
   const userData = useSelector((state: webState) => state.userData);
+  const router = useRouter();
 
   let email = "";
   let password = "";
@@ -22,6 +25,7 @@ export default function login({}: Props) {
 
     if (userData.has(email)) {
       // successful login
+      router.push(`/${email}`);
     } else {
       // show error
       console.log("Invalid details");
@@ -31,6 +35,7 @@ export default function login({}: Props) {
 
   return (
     <div className={styles.grid}>
+      <Meta />
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField

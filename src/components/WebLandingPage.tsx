@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 interface Props {}
 
-export default function WebWrapper({}: Props) {
+export default function WebLandingPage({}: Props) {
   return (
     <div>
       <h1>LANDING PAGE</h1>

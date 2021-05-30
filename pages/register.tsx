@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
+import Meta from "../src/components/Meta";
 import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../src/reducers";
 import { updateUserStatus, addUser } from "../src/actions";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import styles from "../src/styles/web/general.module.css";
 
 interface Props {}
@@ -11,9 +13,10 @@ interface Props {}
 export default function register({}: Props) {
   const [registerChosen, setRegisterChosen] = useState<string | null>(null);
 
-  //   const userStatus = useSelector((state: webState) => state.userStatus);
+  const userStatus = useSelector((state: webState) => state.userStatus);
   const userData = useSelector((state: webState) => state.userData);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   let firstName = "";
   let surname = "";
@@ -29,6 +32,15 @@ export default function register({}: Props) {
     e.preventDefault();
 
     dispatch(
+      updateUserStatus(
+        "sign-in",
+        registerChosen == "client" ? true : false,
+        true,
+        email
+      )
+    );
+
+    dispatch(
       addUser(
         registerChosen == "client" ? "add-client" : "add-cleaner",
         firstName,
@@ -41,26 +53,18 @@ export default function register({}: Props) {
       )
     );
 
-    dispatch(
-      updateUserStatus(
-        "sign-in",
-        registerChosen == "client" ? true : false,
-        true,
-        email
-      )
-    );
-
     console.log(userData);
+    console.log(userStatus);
+    
+    // router.push(`/${email}`);
   };
 
   if (registerChosen == null) {
     return (
       <div className={styles.grid}>
+        <Meta />
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Typography variant="h3" align="center">
-              {registerChosen == null ? "Nothing" : registerChosen}
-            </Typography>
             <Button
               variant="contained"
               color="secondary"
@@ -94,6 +98,7 @@ export default function register({}: Props) {
   } else {
     return (
       <div className={styles.grid}>
+        <Meta />
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField

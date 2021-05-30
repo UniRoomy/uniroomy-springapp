@@ -38,20 +38,23 @@ const counterReducer = (state: number = 0, action: CounterAction) => {
 
 // Reducers --------------------------------------------------------------
 
+const defaultUserStatus = {
+  isClient: null,
+  loggedIn: false,
+  userEmail: null,
+};
+
 const userStatusReducer = (
-  state: UserStatusType,
+  state: UserStatusType = defaultUserStatus,
   action: UpdateUserStatusAction
 ): UserStatusType => {
   switch (action.type) {
     case "sign-in":
+      return action.payload;
     case "sign-out":
       return action.payload;
     default:
-      return {
-        isClient: null,
-        loggedIn: false,
-        userEmail: null,
-      };
+      return state;
   }
 };
 
