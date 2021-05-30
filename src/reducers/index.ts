@@ -1,17 +1,22 @@
 import { combineReducers } from "redux";
+import {
+  UserStatusType,
+  UserDataMapType,
+  UpdateUserStatusAction,
+  AddUserAction,
+} from "../types";
 
 /*
-loginStatus: {
+userStatus: {
   client: boolean | null;     // if not logged in yet
   loggedIn: boolean           // default = false
+  userEmail: string           // used to identify which user it is
 }
 
-userMap: Map<username -> {...}>
+userMap: Map<userEmail -> {...}>
 */
 
-// Mobile reducers
-
-// Web reducers
+// Example Reducer
 
 interface CounterAction {
   type: string;
@@ -31,13 +36,46 @@ const counterReducer = (state: number = 0, action: CounterAction) => {
   }
 };
 
-// Combine the above reducers for Mobile & Web
+// Reducers --------------------------------------------------------------
+
+const userStatusReducer = (
+  state: UserStatusType,
+  action: UpdateUserStatusAction
+): UserStatusType => {
+  switch (action.type) {
+    case "sign-in":
+    case "sign-out":
+      return action.payload;
+    default:
+      return {
+        isClient: null,
+        loggedIn: false,
+        userEmail: null,
+      };
+  }
+};
+
+const userDataReducer = (
+  state: UserDataMapType = new Map(),
+  action: AddUserAction
+): UserDataMapType => {
+  switch (action.type) {
+    case "add":
+      state.set(action.payload.email, action.payload);
+      return state;
+    default:
+      return state;
+  }
+};
+
+// Combine the above reducers for Mobile & Web ---------------------------
 
 export const mobileReducers = combineReducers({
   counter: counterReducer,
 });
 export const webReducers = combineReducers({
-  counter: counterReducer,
+  userStatus: userStatusReducer,
+  userData: userDataReducer,
 });
 
 export type mobileState = ReturnType<typeof mobileReducers>;

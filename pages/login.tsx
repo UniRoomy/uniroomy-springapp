@@ -1,15 +1,32 @@
 import React from "react";
-import { Button, Grid, TextField } from "@material-ui/core";
 import Link from "next/link";
+import { Button, Grid, TextField } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import type { webState } from "../src/reducers";
 import styles from "../src/styles/web/general.module.css";
 
 interface Props {}
 
 export default function login({}: Props) {
+  const userData = useSelector((state: webState) => state.userData);
+
+  let email = "";
+  let password = "";
+
   const loginBtnClicked = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | null
   ): void => {
-    // e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (userData.has(email)) {
+      // successful login
+    } else {
+      // show error
+      console.log("Invalid details");
+      console.log(userData);
+    }
   };
 
   return (
@@ -23,7 +40,7 @@ export default function login({}: Props) {
             margin="normal"
             size="small"
             fullWidth={true}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => (email = e.target.value)}
           />
           <br />
           <TextField
@@ -34,7 +51,7 @@ export default function login({}: Props) {
             size="small"
             margin="normal"
             fullWidth={true}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => (password = e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
