@@ -6,16 +6,6 @@ import {
   AddUserAction,
 } from "../types";
 
-/*
-userStatus: {
-  client: boolean | null;     // if not logged in yet
-  loggedIn: boolean           // default = false
-  userEmail: string           // used to identify which user it is
-}
-
-userMap: Map<userEmail -> {...}>
-*/
-
 // Example Reducer
 
 interface CounterAction {
