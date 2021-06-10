@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../../src/reducers";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { UserStatusType, UserDataMapType } from "../../src/types";
+// import fetch from "node-fetch";
+import { defaultUsers } from "../../src/data";
 
 interface Props {
   email: string;
@@ -21,10 +23,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  console.log("PATHS");
-  //   const userData = useSelector((state: webState) => state.userData);
+  // const res = await fetch("https://localhost/:3000/api/getDefaultUsers");
+  // const data = await res.json();
 
-  const ids: string[] = ["gmail"];
+  const ids: string[] = defaultUsers.map((userObj) => userObj.email);
   const paths = ids.map((email: string) => ({
     params: { id: email },
   }));

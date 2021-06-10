@@ -7,6 +7,8 @@ module.exports = {
     "@babel/preset-react",
     "babel-preset-expo",
     "@babel/preset-env",
+    // "module:metro-react-native-babel-preset",
+    // "module:react-native-dotenv",
   ],
   env: {
     development: {
