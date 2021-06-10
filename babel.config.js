@@ -10,10 +10,7 @@ module.exports = {
   ],
   env: {
     development: {
-      plugins: [
-      "@babel/plugin-transform-react-jsx",
-      "@babel/plugin-proposal-private-methods", { "loose": true }
-    ],
-   },
+      plugins: ["@babel/plugin-transform-react-jsx"],
+    },
   },
 };
