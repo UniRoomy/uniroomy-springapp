@@ -1,7 +1,6 @@
 import {
   UpdateUserStatusAction,
   AddUserAction,
-  UserDataMapType,
   BasicUserData,
   ClientDataType,
   CleanerDataType,
@@ -42,6 +41,7 @@ export const updateUserStatus = (
 export const addUser = (
   // Required params
   actionType: string,
+  isClient: boolean,
   firstName: string,
   surname: string,
   email: string,
@@ -57,6 +57,7 @@ export const addUser = (
     surname: surname,
     email: email,
     password: password,
+    isClient: isClient,
   };
 
   if (actionType == "add-client") {

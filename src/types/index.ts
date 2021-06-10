@@ -11,6 +11,7 @@ export interface BasicUserData {
   surname: string;
   email: string;
   password: string; // may need to be hashed for security purposes
+  isClient: boolean;
 }
 
 export interface ClientDataType extends BasicUserData {

@@ -31,18 +31,14 @@ export default function register({}: Props) {
   ): void => {
     e.preventDefault();
 
-    dispatch(
-      updateUserStatus(
-        "sign-in",
-        registerChosen == "client" ? true : false,
-        true,
-        email
-      )
-    );
+    const isClient = registerChosen == "client" ? true : false;
+
+    dispatch(updateUserStatus("sign-in", isClient, true, email));
 
     dispatch(
       addUser(
         registerChosen == "client" ? "add-client" : "add-cleaner",
+        isClient,
         firstName,
         surname,
         email,
@@ -55,7 +51,7 @@ export default function register({}: Props) {
 
     console.log(userData);
     console.log(userStatus);
-    
+
     // router.push(`/${email}`);
   };
 

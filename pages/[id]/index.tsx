@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../../src/reducers";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { UserStatusType, UserDataMapType } from "../../src/types";
-// import fetch from "node-fetch";
 import { defaultUsers } from "../../src/data";
+import { withRouter } from "next/router";
 
 interface Props {
   email: string;
@@ -12,8 +12,6 @@ interface Props {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const email = context.params.id;
-
-  console.log("Email: " + email);
 
   return {
     props: {
@@ -38,15 +36,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 // export default function home({ email, userStatus, userData }: Props) {
-export default function home({ email }: Props) {
+function home({ email, router }) {
   const userStatus = useSelector((state: webState) => state.userStatus);
   const userData = useSelector((state: webState) => state.userData);
   const dispatch = useDispatch();
+
+  console.log(router);
 
   return (
     <div>
       <h1>Home Page</h1>
       <h4>{email}</h4>
+      <h4>{userStatus.userEmail ? userStatus.userEmail : "No Email :("}</h4>
     </div>
   );
 }
+
+export default withRouter(home);

@@ -13,10 +13,11 @@ export default function index({}: Props) {
 
   useEffect(() => {
     defaultUsers.map((userObj) => {
-      if (Object.keys(userObj).length == 4) {
+      if (Object.keys(userObj).length == 5) {
         dispatch(
           addUser(
             "add-client",
+            true,
             userObj.firstName,
             userObj.surname,
             userObj.email,
@@ -30,6 +31,7 @@ export default function index({}: Props) {
         dispatch(
           addUser(
             "add-cleaner",
+            false,
             userObj.firstName,
             userObj.surname,
             userObj.email,
@@ -41,7 +43,8 @@ export default function index({}: Props) {
         );
       }
     });
-  }, []);
+    console.log(userData);
+  }, [userData]);
 
   return (
     <>

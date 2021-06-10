@@ -1,29 +1,68 @@
+import { useEffect } from "react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { webState } from "../reducers";
 import navStyles from "../styles/web/Nav.module.css";
 
 interface Props {}
 
-// Will need to check loginStatus state -> then display relevant nav-links
-
 export default function Nav({}: Props) {
+  const userStatus = useSelector((state: webState) => state.userStatus);
+
   return (
     <nav className={navStyles.nav}>
       <ul>
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/register">
-            <a>Register</a>
-          </Link>
-        </li>
+        {!userStatus.loggedIn ? (
+          <>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/register">
+                <a>Register</a>
+              </Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link href="/home">
+                <a>Home</a>
+              </Link>
+            </li>
+            {userStatus.isClient ? (
+              // CLIENTS
+              <>
+                <li>
+                  <Link href="/booking-page">
+                    <a>Booking Page</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              // CLEANERS
+              <>
+                <li>
+                  <Link href="/accepted-bookings">
+                    <a>Accepted Bookings</a>
+                  </Link>
+                </li>
+              </>
+            )}
+            <li>
+              <Link href="/book-history">
+                <a>Booking History</a>
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

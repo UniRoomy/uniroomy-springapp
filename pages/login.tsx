@@ -1,31 +1,40 @@
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Meta from "../src/components/Meta";
+import { useRouter } from "next/router";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../src/reducers";
+import { updateUserStatus } from "../src/actions";
 import styles from "../src/styles/web/general.module.css";
 
 interface Props {}
 
 export default function login({}: Props) {
   const userData = useSelector((state: webState) => state.userData);
+  const userStatus = useSelector((state: webState) => state.userStatus);
+  const dispatch = useDispatch();
   const router = useRouter();
 
-  let email = "";
-  let password = "";
+  let email = "email1";
+  let password = "testing";
 
   const loginBtnClicked = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | null
-  ): void => {
+  ) => {
     if (e) {
       e.preventDefault();
     }
 
     if (userData.has(email)) {
       // successful login
-      router.push(`/${email}`);
+      dispatch(
+        updateUserStatus("sign-in", userData.get(email).isClient, true, email)
+      );
+      router.push({
+        pathname: `/${email}`,
+        query: {},
+      });
     } else {
       // show error
       console.log("Invalid details");
