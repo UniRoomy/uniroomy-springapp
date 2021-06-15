@@ -2,25 +2,8 @@ import {
   UpdateUserStatusAction,
   AddUserAction,
   BasicUserData,
-  ClientDataType,
-  CleanerDataType,
+  Users,
 } from "../types";
-
-// Simple example action
-export const increment = (num: number) => {
-  return {
-    type: "increment",
-    payload: {
-      size: num,
-    },
-  };
-};
-
-export const decrement = () => {
-  return {
-    type: "decrement",
-  };
-};
 
 export const updateUserStatus = (
   actionType: string,
@@ -52,7 +35,7 @@ export const addUser = (
   businessPhoneNumber: string | null,
   businessAddress: string | null
 ): AddUserAction => {
-  let payload: BasicUserData | (ClientDataType | CleanerDataType) = {
+  let payload: BasicUserData | Users = {
     firstName: firstName,
     surname: surname,
     email: email,
@@ -74,5 +57,14 @@ export const addUser = (
   return {
     type: "add",
     payload: payload,
+  };
+};
+
+export const updateCurrentUser = (currentUserData: Users) => {
+  return {
+    type: "update",
+    payload: {
+      data: currentUserData,
+    },
   };
 };

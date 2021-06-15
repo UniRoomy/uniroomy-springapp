@@ -1,5 +1,5 @@
 import React from "react";
-// import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MobileWrapper from "./src/components/MobileWrapper";
 
 export default function App() {

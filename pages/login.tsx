@@ -5,14 +5,15 @@ import { useRouter } from "next/router";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import type { webState } from "../src/reducers";
-import { updateUserStatus } from "../src/actions";
+import { updateUserStatus, updateCurrentUser } from "../src/actions";
+import { defaultUsers } from "../src/data";
 import styles from "../src/styles/web/general.module.css";
 
 interface Props {}
 
 export default function login({}: Props) {
-  const userData = useSelector((state: webState) => state.userData);
-  const userStatus = useSelector((state: webState) => state.userStatus);
+  // const userData = useSelector((state: webState) => state.userData);
+  // const userStatus = useSelector((state: webState) => state.userStatus);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -26,20 +27,37 @@ export default function login({}: Props) {
       e.preventDefault();
     }
 
-    if (userData.has(email)) {
-      // successful login
-      dispatch(
-        updateUserStatus("sign-in", userData.get(email).isClient, true, email)
-      );
-      router.push({
-        pathname: `/${email}`,
-        query: {},
-      });
-    } else {
-      // show error
-      console.log("Invalid details");
-      console.log(userData);
-    }
+    defaultUsers.map((userObj) => {
+      if (userObj.email == email && userObj.password == password) {
+        // successful login
+        dispatch(updateCurrentUser(userObj));
+
+        dispatch(
+          updateUserStatus("sign-in", userObj.isClient, true, userObj.email)
+        );
+
+        router.push({
+          pathname: `/${userObj.email}`,
+          query: {},
+        });
+        return;
+      }
+    });
+
+    // if (userData.has(email)) {
+    //   // successful login
+    //   dispatch(
+    //     updateUserStatus("sign-in", userData.get(email).isClient, true, email)
+    //   );
+    //   router.push({
+    //     pathname: `/${email}`,
+    //     query: {},
+    //   });
+    // } else {
+    //   // show error
+    //   console.log(userData);
+    // }
+    console.log("Invalid details");
   };
 
   return (

@@ -10,7 +10,7 @@ export interface BasicUserData {
   firstName: string;
   surname: string;
   email: string;
-  password: string; // may need to be hashed for security purposes
+  password: string;
   isClient: boolean;
 }
 
@@ -24,7 +24,9 @@ export interface CleanerDataType extends BasicUserData {
   businessAddress: string;
 }
 
-export type UserDataMapType = Map<string, ClientDataType | CleanerDataType>;
+export type Users = ClientDataType | CleanerDataType;
+
+export type UserDataMapType = Map<string, Users>;
 
 // ACTIONS
 
@@ -35,5 +37,12 @@ export interface UpdateUserStatusAction {
 
 export interface AddUserAction {
   type: string;
-  payload: ClientDataType | CleanerDataType;
+  payload: Users;
+}
+
+export interface UpdateCurrentUserAction {
+  type: string;
+  payload: {
+    data: Users;
+  };
 }

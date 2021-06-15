@@ -38,15 +38,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // export default function home({ email, userStatus, userData }: Props) {
 function home({ email, router }) {
   const userStatus = useSelector((state: webState) => state.userStatus);
-  const userData = useSelector((state: webState) => state.userData);
-  const dispatch = useDispatch();
+  const currentUser = useSelector((state: webState) => state.currentUser);
+  // const dispatch = useDispatch();
 
-  console.log(router);
+  console.log(userStatus);
+  console.log(currentUser);
 
   return (
     <div>
       <h1>Home Page</h1>
-      <h4>{email}</h4>
       <h4>{userStatus.userEmail ? userStatus.userEmail : "No Email :("}</h4>
     </div>
   );

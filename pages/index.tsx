@@ -8,9 +8,11 @@ import { defaultUsers } from "../src/data";
 interface Props {}
 
 export default function index({}: Props) {
-  const userData = useSelector((state: webState) => state.userData);
-  const dispatch = useDispatch();
+  // const userData = useSelector((state: webState) => state.userData);
+  // const userStatus = useSelector((state: webState) => state.userStatus);
+  // const dispatch = useDispatch();
 
+  /*
   useEffect(() => {
     defaultUsers.map((userObj) => {
       if (Object.keys(userObj).length == 5) {
@@ -43,8 +45,8 @@ export default function index({}: Props) {
         );
       }
     });
-    console.log(userData);
-  }, [userData]);
+  }, []); 
+  */
 
   return (
     <>
