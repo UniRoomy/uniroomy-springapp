@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   max-width: 800px;
   margin-top: 3rem;
+  /* transform: translateX(50%); */
 }
 
 .card {

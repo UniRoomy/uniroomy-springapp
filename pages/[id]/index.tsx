@@ -35,7 +35,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// export default function home({ email, userStatus, userData }: Props) {
 function home({ email, router }) {
   const userStatus = useSelector((state: webState) => state.userStatus);
   const currentUser = useSelector((state: webState) => state.currentUser);

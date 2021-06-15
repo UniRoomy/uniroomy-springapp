@@ -33,7 +33,7 @@ export default function Nav({}: Props) {
         ) : (
           <>
             <li>
-              <Link href="/home">
+              <Link href={`/${userStatus.userEmail}`}>
                 <a>Home</a>
               </Link>
             </li>
@@ -41,7 +41,7 @@ export default function Nav({}: Props) {
               // CLIENTS
               <>
                 <li>
-                  <Link href="/booking-page">
+                  <Link href={`/${userStatus.userEmail}/bookingPage`}>
                     <a>Booking Page</a>
                   </Link>
                 </li>
@@ -50,14 +50,14 @@ export default function Nav({}: Props) {
               // CLEANERS
               <>
                 <li>
-                  <Link href="/accepted-bookings">
+                  <Link href={`/${userStatus.userEmail}/acceptedBookings`}>
                     <a>Accepted Bookings</a>
                   </Link>
                 </li>
               </>
             )}
             <li>
-              <Link href="/book-history">
+              <Link href={`/${userStatus.userEmail}/bookingHistory`}>
                 <a>Booking History</a>
               </Link>
             </li>
