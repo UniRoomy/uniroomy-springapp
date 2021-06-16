@@ -28,6 +28,21 @@ export type Users = ClientDataType | CleanerDataType;
 
 export type UserDataMapType = Map<string, Users>;
 
+// Bookings
+
+export interface Booking {
+  clientId: string;
+  // cleanerId: string,
+  dateOfBooking: Date;
+  preferredTime: Date[];
+  timeRequired: string;
+  repeatBooking: boolean;
+  repeatInterval: string;
+  endOfTenancy: Date;
+  toBeCleaned: string;
+  completed: boolean;
+}
+
 // ACTIONS
 
 export interface UpdateUserStatusAction {
@@ -44,5 +59,12 @@ export interface UpdateCurrentUserAction {
   type: string;
   payload: {
     data: Users;
+  };
+}
+
+export interface AddBookingAction {
+  type: string;
+  payload: {
+    data: Booking;
   };
 }

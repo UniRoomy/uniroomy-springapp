@@ -13,6 +13,7 @@ export default function index({}: Props) {
   // const dispatch = useDispatch();
 
   /*
+  // loading users (not being persisted so just used the data.ts file directly)
   useEffect(() => {
     defaultUsers.map((userObj) => {
       if (Object.keys(userObj).length == 5) {

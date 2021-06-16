@@ -1,7 +1,6 @@
 import * as React from "react";
 import { AppProps } from "next/app";
 import Layout from "../src/components/Layout";
-import { UserDataMapType } from "../src/types";
 import "../src/styles/web/globals.css";
 // redux
 import { createStore, applyMiddleware } from "redux";
@@ -12,14 +11,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
-// import AsyncStorage from "@react-native-community/async-storage";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 
-export const persistConfig = {
+const persistConfig = {
   key: "root",
   storage: storage,
-  // whitelist: ["userData", "userStatus"],
   stateReconciler: autoMergeLevel2,
 };
 

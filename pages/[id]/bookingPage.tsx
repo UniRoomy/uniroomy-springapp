@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import type { webState } from "../../src/reducers";
+import { useSelector, useDispatch } from "react-redux";
+import type { webState } from "../../src/reducers";
 import {
   Grid,
   Button,
@@ -20,8 +20,8 @@ import {
 } from "@material-ui/lab";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import { Theme } from "@material-ui/core/styles";
-// import styles from "../../src/styles/web/general.module.css";
 import { makeStyles } from "@material-ui/styles";
+import { addBooking } from "../../src/actions";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,19 +44,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {}
 
 export default function bookingPage({}: Props) {
+  const currentUser = useSelector((state: webState) => state.currentUser);
+  const dispatch = useDispatch();
+
   const [data, setData] = useState({
-    date: new Date(),
+    dateOfBooking: new Date(),
     preferredTime: [new Date(), new Date()], // [timeFrom, timeTo]
     timeRequired: "",
-    repeat: true,
-    repeatInterval: "Bi-Weekly",
+    repeatBooking: false,
+    repeatInterval: "None Chosen",
     endOfTenancy: new Date(),
     toBeCleaned: "None",
+    completed: false,
   });
   const classes = useStyles();
 
   const repeatOptions = [
-    "Weekly",
+    "None Chosen",
+    "Weekly Interval",
     "Bi-Weekly",
     "Tri-Weekly",
     "Once a Month",
@@ -70,8 +75,6 @@ export default function bookingPage({}: Props) {
     newTime: string | Date,
     changeTimeFrom: boolean
   ) => {
-    console.log(newTime);
-    console.log(newTime.toString());
     if (changeTimeFrom) {
       setData({
         ...data,
@@ -85,15 +88,20 @@ export default function bookingPage({}: Props) {
     }
   };
 
-  const handleRepeatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, repeat: e.target.checked });
+  const handleBooking = () => {
+    console.log(data);
+    if (!data.repeatBooking) {
+      setData({ ...data, repeatInterval: repeatOptions[0] });
+    }
+    dispatch(addBooking({ ...data, clientId: currentUser.email }));
   };
 
   return (
-    <Grid container spacing={1} className={classes.root} align="center">
+    // <Grid container spacing={1} className={classes.root} align="center">
+    <Grid container spacing={1} className={classes.root}>
       <Grid item xs={12}>
         <Typography variant="h6" component="h6">
-          Book a clean here!
+          Booking Page - Book a clean here!
         </Typography>
       </Grid>
       <br />
@@ -104,8 +112,8 @@ export default function bookingPage({}: Props) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
             label="Date of booking"
-            value={data.date}
-            onChange={(newDate) => setData({ ...data, date: newDate })}
+            value={data.dateOfBooking}
+            onChange={(newDate) => setData({ ...data, dateOfBooking: newDate })}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
@@ -155,8 +163,10 @@ export default function bookingPage({}: Props) {
           control={
             <Checkbox
               color="primary"
-              checked={data.repeat}
-              onChange={(e) => setData({ ...data, repeat: e.target.checked })}
+              checked={data.repeatBooking}
+              onChange={(e) =>
+                setData({ ...data, repeatBooking: e.target.checked })
+              }
             />
           }
           label="Repeat Booking?"
@@ -164,7 +174,7 @@ export default function bookingPage({}: Props) {
         />
       </Grid>
 
-      {data.repeat ? (
+      {data.repeatBooking ? (
         <>
           {/* Repeat Interval: weekly, bi-weekly */}
           <Grid item xs={12}>
@@ -207,7 +217,6 @@ export default function bookingPage({}: Props) {
           <Select
             value={data.toBeCleaned}
             onChange={(e) => setData({ ...data, toBeCleaned: e.target.value })}
-            label="snxjhbsd"
           >
             {cleaningOptions.map((option, idx) => (
               <MenuItem value={option} key={idx}>
@@ -218,13 +227,11 @@ export default function bookingPage({}: Props) {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button className={classes.btn} color="primary">
+        {/* style={{color: "white"}} */}
+        <Button className={classes.btn} color="primary" onClick={handleBooking}>
           Book Clean
         </Button>
       </Grid>
     </Grid>
   );
-}
-{
-  /*  */
 }

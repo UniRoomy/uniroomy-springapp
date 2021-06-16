@@ -4,8 +4,8 @@ export const defaultUsers: Array<ClientDataType | CleanerDataType> = [
   // Clients
   {
     isClient: true,
-    firstName: "sahir",
-    surname: "ali",
+    firstName: "mr",
+    surname: "bob",
     email: "email1",
     password: "testing",
   },
@@ -14,7 +14,7 @@ export const defaultUsers: Array<ClientDataType | CleanerDataType> = [
     firstName: "tech",
     surname: "wizard",
     email: "email2",
-    password: "test",
+    password: "testing",
   },
   // Cleaners
   {

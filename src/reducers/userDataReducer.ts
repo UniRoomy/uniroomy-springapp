@@ -18,7 +18,7 @@ const userDataReducer = (
   action: AddUserAction
 ): UserDataMapType => {
   switch (action.type) {
-    case "add":
+    case "add-user":
       if (state.size == undefined) {
         state = new Map();
       }

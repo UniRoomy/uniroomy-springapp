@@ -28,7 +28,6 @@
     "@material-ui/core": "^5.0.0-alpha.36",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^5.0.0-alpha.36",
-    "@react-native-community/async-storage": "^1.12.1",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react": "^11.2.6",

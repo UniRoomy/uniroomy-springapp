@@ -3,6 +3,9 @@ import {
   AddUserAction,
   BasicUserData,
   Users,
+  UpdateCurrentUserAction,
+  Booking,
+  AddBookingAction,
 } from "../types";
 
 export const updateUserStatus = (
@@ -55,16 +58,27 @@ export const addUser = (
   }
 
   return {
-    type: "add",
+    type: "add-user",
     payload: payload,
   };
 };
 
-export const updateCurrentUser = (currentUserData: Users) => {
+export const updateCurrentUser = (
+  currentUserData: Users
+): UpdateCurrentUserAction => {
   return {
     type: "update",
     payload: {
       data: currentUserData,
+    },
+  };
+};
+
+export const addBooking = (booking: Booking): AddBookingAction => {
+  return {
+    type: "add",
+    payload: {
+      data: booking,
     },
   };
 };
