@@ -1,74 +1,48 @@
 import { combineReducers } from "redux";
-import {
-  UserStatusType,
-  UserDataMapType,
-  UpdateUserStatusAction,
-  AddUserAction,
-} from "../types";
+import userStatusReducer from "./userStatusReducer";
+import userDataReducer from "./userDataReducer";
+import currentUserReducer from "./currentUserReducer";
+import bookingReducer from "./bookingReducer";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 
-// Example Reducer
-
-interface CounterAction {
-  type: string;
-  payload: {
-    size: number;
-  };
-}
-
-const counterReducer = (state: number = 0, action: CounterAction) => {
-  switch (action.type) {
-    case "increment":
-      return state + action.payload.size;
-    case "decrement":
-      return state - 1;
-    default:
-      return state;
-  }
+/* persist-reducer configs  - if reducers need to be persisted individually
+const statusPersistConfig = {
+  key: "userStatus",
+  storage: storage,
+  stateReconciler: autoMergeLevel2,
 };
 
-// Reducers --------------------------------------------------------------
-
-const defaultUserStatus = {
-  isClient: null,
-  loggedIn: false,
-  userEmail: null,
+const currentUserPersistConfig = {
+  key: "currentUser",
+  storage: storage,
+  stateReconciler: autoMergeLevel2,
 };
 
-const userStatusReducer = (
-  state: UserStatusType = defaultUserStatus,
-  action: UpdateUserStatusAction
-): UserStatusType => {
-  switch (action.type) {
-    case "sign-in":
-      return action.payload;
-    case "sign-out":
-      return action.payload;
-    default:
-      return state;
-  }
+const bookingsPersistConfig = {
+  key: "bookings",
+  storage: storage,
+  // stateReconciler: autoMergeLevel2,
 };
-
-const userDataReducer = (
-  state: UserDataMapType = new Map(),
-  action: AddUserAction
-): UserDataMapType => {
-  switch (action.type) {
-    case "add":
-      state.set(action.payload.email, action.payload);
-      return state;
-    default:
-      return state;
-  }
-};
+*/
 
 // Combine the above reducers for Mobile & Web ---------------------------
 
 export const mobileReducers = combineReducers({
-  counter: counterReducer,
-});
-export const webReducers = combineReducers({
   userStatus: userStatusReducer,
   userData: userDataReducer,
+  currentUser: currentUserReducer,
+  bookings: bookingReducer,
+});
+
+export const webReducers = combineReducers({
+  // userStatus: persistReducer(statusPersistConfig, userStatusReducer),
+  // currentUser: persistReducer(currentUserPersistConfig, currentUserReducer),
+  // bookings: persistReducer(bookingsPersistConfig, bookingReducer),
+  userStatus: userStatusReducer,
+  currentUser: currentUserReducer,
+  bookings: bookingReducer,     // *** Not being persisted on page refresh/navigate
 });
 
 export type mobileState = ReturnType<typeof mobileReducers>;

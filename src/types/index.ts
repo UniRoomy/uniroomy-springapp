@@ -10,7 +10,8 @@ export interface BasicUserData {
   firstName: string;
   surname: string;
   email: string;
-  password: string; // may need to be hashed for security purposes
+  password: string;
+  isClient: boolean;
 }
 
 export interface ClientDataType extends BasicUserData {
@@ -23,7 +24,24 @@ export interface CleanerDataType extends BasicUserData {
   businessAddress: string;
 }
 
-export type UserDataMapType = Map<string, ClientDataType | CleanerDataType>;
+export type Users = ClientDataType | CleanerDataType;
+
+export type UserDataMapType = Map<string, Users>;
+
+// Bookings
+
+export interface Booking {
+  clientId: string;
+  // cleanerId: string,
+  dateOfBooking: Date;
+  preferredTime: Date[];
+  timeRequired: string;
+  repeatBooking: boolean;
+  repeatInterval: string;
+  endOfTenancy: Date;
+  toBeCleaned: string;
+  completed: boolean;
+}
 
 // ACTIONS
 
@@ -34,5 +52,19 @@ export interface UpdateUserStatusAction {
 
 export interface AddUserAction {
   type: string;
-  payload: ClientDataType | CleanerDataType;
+  payload: Users;
+}
+
+export interface UpdateCurrentUserAction {
+  type: string;
+  payload: {
+    data: Users;
+  };
+}
+
+export interface AddBookingAction {
+  type: string;
+  payload: {
+    data: Booking;
+  };
 }

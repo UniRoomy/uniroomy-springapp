@@ -8,15 +8,19 @@ import { defaultUsers } from "../src/data";
 interface Props {}
 
 export default function index({}: Props) {
-  const userData = useSelector((state: webState) => state.userData);
-  const dispatch = useDispatch();
+  // const userData = useSelector((state: webState) => state.userData);
+  // const userStatus = useSelector((state: webState) => state.userStatus);
+  // const dispatch = useDispatch();
 
+  /*
+  // loading users (not being persisted so just used the data.ts file directly)
   useEffect(() => {
     defaultUsers.map((userObj) => {
-      if (Object.keys(userObj).length == 4) {
+      if (Object.keys(userObj).length == 5) {
         dispatch(
           addUser(
             "add-client",
+            true,
             userObj.firstName,
             userObj.surname,
             userObj.email,
@@ -30,6 +34,7 @@ export default function index({}: Props) {
         dispatch(
           addUser(
             "add-cleaner",
+            false,
             userObj.firstName,
             userObj.surname,
             userObj.email,
@@ -41,7 +46,8 @@ export default function index({}: Props) {
         );
       }
     });
-  }, []);
+  }, []); 
+  */
 
   return (
     <>

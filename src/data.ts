@@ -3,19 +3,22 @@ import { ClientDataType, CleanerDataType } from "./types";
 export const defaultUsers: Array<ClientDataType | CleanerDataType> = [
   // Clients
   {
-    firstName: "sahir",
-    surname: "ali",
+    isClient: true,
+    firstName: "mr",
+    surname: "bob",
     email: "email1",
     password: "testing",
   },
   {
+    isClient: true,
     firstName: "tech",
     surname: "wizard",
     email: "email2",
-    password: "test",
+    password: "testing",
   },
   // Cleaners
   {
+    isClient: false,
     firstName: "cleaner1",
     surname: "f",
     email: "email3",

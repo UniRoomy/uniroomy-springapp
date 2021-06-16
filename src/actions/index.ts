@@ -1,27 +1,12 @@
 import {
   UpdateUserStatusAction,
   AddUserAction,
-  UserDataMapType,
   BasicUserData,
-  ClientDataType,
-  CleanerDataType,
+  Users,
+  UpdateCurrentUserAction,
+  Booking,
+  AddBookingAction,
 } from "../types";
-
-// Simple example action
-export const increment = (num: number) => {
-  return {
-    type: "increment",
-    payload: {
-      size: num,
-    },
-  };
-};
-
-export const decrement = () => {
-  return {
-    type: "decrement",
-  };
-};
 
 export const updateUserStatus = (
   actionType: string,
@@ -42,6 +27,7 @@ export const updateUserStatus = (
 export const addUser = (
   // Required params
   actionType: string,
+  isClient: boolean,
   firstName: string,
   surname: string,
   email: string,
@@ -52,11 +38,12 @@ export const addUser = (
   businessPhoneNumber: string | null,
   businessAddress: string | null
 ): AddUserAction => {
-  let payload: BasicUserData | (ClientDataType | CleanerDataType) = {
+  let payload: BasicUserData | Users = {
     firstName: firstName,
     surname: surname,
     email: email,
     password: password,
+    isClient: isClient,
   };
 
   if (actionType == "add-client") {
@@ -71,7 +58,27 @@ export const addUser = (
   }
 
   return {
-    type: "add",
+    type: "add-user",
     payload: payload,
+  };
+};
+
+export const updateCurrentUser = (
+  currentUserData: Users
+): UpdateCurrentUserAction => {
+  return {
+    type: "update",
+    payload: {
+      data: currentUserData,
+    },
+  };
+};
+
+export const addBooking = (booking: Booking): AddBookingAction => {
+  return {
+    type: "add",
+    payload: {
+      data: booking,
+    },
   };
 };

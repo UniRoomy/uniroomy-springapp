@@ -14,9 +14,9 @@ export default function register({}: Props) {
   const [registerChosen, setRegisterChosen] = useState<string | null>(null);
 
   const userStatus = useSelector((state: webState) => state.userStatus);
-  const userData = useSelector((state: webState) => state.userData);
+  // const userData = useSelector((state: webState) => state.userData);
   const dispatch = useDispatch();
-  const router = useRouter();
+  // const router = useRouter();
 
   let firstName = "";
   let surname = "";
@@ -31,31 +31,24 @@ export default function register({}: Props) {
   ): void => {
     e.preventDefault();
 
-    dispatch(
-      updateUserStatus(
-        "sign-in",
-        registerChosen == "client" ? true : false,
-        true,
-        email
-      )
-    );
+    const isClient = registerChosen == "client" ? true : false;
 
-    dispatch(
-      addUser(
-        registerChosen == "client" ? "add-client" : "add-cleaner",
-        firstName,
-        surname,
-        email,
-        password,
-        businessName,
-        businessPhoneNumber,
-        businessAddress
-      )
-    );
+    dispatch(updateUserStatus("sign-in", isClient, true, email));
 
-    console.log(userData);
-    console.log(userStatus);
-    
+    // dispatch(
+    //   addUser(
+    //     registerChosen == "client" ? "add-client" : "add-cleaner",
+    //     isClient,
+    //     firstName,
+    //     surname,
+    //     email,
+    //     password,
+    //     businessName,
+    //     businessPhoneNumber,
+    //     businessAddress
+    //   )
+    // );
+
     // router.push(`/${email}`);
   };
 
